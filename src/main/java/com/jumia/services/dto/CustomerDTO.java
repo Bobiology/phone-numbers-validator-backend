@@ -6,7 +6,7 @@ public class CustomerDTO {
 	public String countryName;
 	public Enum<StatesEnum> countryState;
 	public Integer countryCode;
-	public Integer phoneNumber;
+	public String phoneNumber;
 
 	public String getCountryName() {
 		return countryName;
@@ -32,11 +32,11 @@ public class CustomerDTO {
 		this.countryCode = countryCode;
 	}
 
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

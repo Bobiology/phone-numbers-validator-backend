@@ -1,11 +1,12 @@
 package com.jumia.services.dao;
 
-import java.util.Collection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.jumia.services.model.Customer;
 
 public interface CustomerDAO {
 	
-	public Collection<Customer> listAll();
+	public Page<Customer> listAll(Pageable pageable);
 
 }
