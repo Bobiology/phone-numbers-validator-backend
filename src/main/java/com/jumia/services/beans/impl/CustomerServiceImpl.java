@@ -15,6 +15,7 @@ import com.jumia.services.Application;
 import com.jumia.services.beans.CustomerService;
 import com.jumia.services.dao.CustomerDAO;
 import com.jumia.services.dto.CustomerDTO;
+import com.jumia.services.exception.JumiaGlobalException;
 import com.jumia.services.model.CountriesMap;
 import com.jumia.services.model.CountriesRegex;
 import com.jumia.services.model.StatesEnum;
@@ -32,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 		List<CustomerDTO> list = new ArrayList<>();
 		
 		var customerList = customerDAO.listAll(pageable);
-
+		
 		customerList.forEach(customer -> {
 			CustomerDTO customerDto = new CustomerDTO();
 			

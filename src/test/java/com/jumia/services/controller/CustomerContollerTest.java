@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.jumia.services.controllers.CustomerController;
+import com.jumia.services.exception.JumiaInternalErrorException;
+import com.jumia.services.exception.JumiaNoContentException;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,23 +28,33 @@ public class CustomerContollerTest {
 	MockMvc mockMvc;
 	
 	@Test
-	public void customerControllerWhenFetchingCountryPhoneNumbersRespondWithStatusCode200() throws Exception {
+	public void customerControllerWhenFetchingCountryPhoneNumbersRespondWithStatusCode200() {
 		String uri = "/customers";
-		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
-				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-		
-		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		MvcResult mvcResult = null;
+		try {
+			mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+					.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+			
+			int status = mvcResult.getResponse().getStatus();
+			assertEquals(200, status);
+			
+		} catch (Exception e) {
+			throw new JumiaInternalErrorException();
+		}
 				
 	}
 	@Test
-	public void evaluatesPageableParameter() throws Exception {
-		mockMvc.perform(get("/customers")
-				.param("page", "2")
-				.param("size", "20")
-				.param("sort", "id,desc")
-				.param("sort", "phone,asc"))
-				.andExpect(status().isOk());
+	public void evaluatesPageableParameter() {
+		try {
+			mockMvc.perform(get("/customers")
+					.param("page", "2")
+					.param("size", "20")
+					.param("sort", "id,desc")
+					.param("sort", "phone,asc"))
+					.andExpect(status().isOk());
+		} catch (Exception e) {
+			throw new JumiaInternalErrorException();
+		}
 		
 	}
 }
