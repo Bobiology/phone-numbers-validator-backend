@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return pageableCustomerList;
 	}
 
-	private CustomerDTO mapCustomerToCustomerDTO(String phoneNumberWithCountryCode) {
+	public CustomerDTO mapCustomerToCustomerDTO(String phoneNumberWithCountryCode) {
 		
 		CustomerDTO customerDto = new CustomerDTO();
 		
@@ -79,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return phoneNumber.matches(regex);
 	}
 
-	private Enum<StatesEnum> getPhoneNumberState(String phoneNumber, String countryName) {
+	public Enum<StatesEnum> getPhoneNumberState(String phoneNumber, String countryName) {
 		return isValid(phoneNumber, countryName) ? StatesEnum.VALID : StatesEnum.NOT_VALID;
 	}
 
@@ -88,17 +88,17 @@ public class CustomerServiceImpl implements CustomerService {
 		return phoneNumber.split("\\s+");
 	}
 
-	private Integer getCountryCode(String[] phoneNumbers) {
+	public Integer getCountryCode(String[] phoneNumbers) {
 
 		return Integer.valueOf(phoneNumbers[0].substring(1, 4));
 	}
 
-	private String getPhoneNumber(String[] phoneNumbers) {
+	public String getPhoneNumber(String[] phoneNumbers) {
 
 		return phoneNumbers[1];
 	}
 
-	private String getCountryName(Integer countryCode) {
+	public String getCountryName(Integer countryCode) {
 
 		CountriesMap map = new CountriesMap();
 
