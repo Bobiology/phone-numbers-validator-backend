@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jumia.services.beans.CustomerService;
 import com.jumia.services.dto.CustomerDTO;
+import com.jumia.services.exception.JumiaNoContentException;
 
 @RequestMapping("customers")
 @RestController
@@ -28,6 +29,9 @@ public class CustomerController {
 	public ResponseEntity<Page<CustomerDTO>> listAll(Pageable pageable){
 		LOGGER.info("Get All Phone numbers ");
 		var customerList = customerService.listAll(pageable);
+		
+		if (customerList.getContent().isEmpty()) throw new JumiaNoContentException();
+		
 		return ResponseEntity.status(HttpStatus.OK).body(customerList);
 	}
 }
