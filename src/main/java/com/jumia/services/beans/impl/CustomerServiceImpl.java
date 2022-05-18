@@ -1,8 +1,6 @@
 package com.jumia.services.beans.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,6 +22,7 @@ import com.jumia.services.model.StatesEnum;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+	
 	@Autowired
 	CustomerDAO customerDAO;
 
@@ -36,19 +35,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 		customerList.forEach(customer -> {
 			CustomerDTO customerDto = new CustomerDTO();
+			
 			var phoneNumberWithCountryCode = customer.getPhone();
 
-			String[] phoneNumberTokens = splitBySpace(phoneNumberWithCountryCode);
-
-			var countryCode = getCountryCode(phoneNumberTokens);
-			var phoneNumber = getPhoneNumber(phoneNumberTokens);
-			var countryName = getCountryName(countryCode);
-			var state = getPhoneNumberState(phoneNumberWithCountryCode, countryName);
-			
-			LOGGER.info("COUNTRY CODE= " + countryCode + " PHONE NUMBER= " + phoneNumber + " COUNTRY NAME= " + countryName
-					+ " STATE=" + state);
-			
-			customerDto = mapCustomerToCustomerDTO(countryCode, phoneNumber, countryName, state);
+			customerDto = mapCustomerToCustomerDTO(phoneNumberWithCountryCode);
 			
 			list.add(customerDto);
 
@@ -59,10 +49,19 @@ public class CustomerServiceImpl implements CustomerService {
 		return pageableCustomerList;
 	}
 
-	private CustomerDTO mapCustomerToCustomerDTO(Integer countryCode, String phoneNumber, String countryName,
-			Enum<StatesEnum> state) {
+	private CustomerDTO mapCustomerToCustomerDTO(String phoneNumberWithCountryCode) {
 		
 		CustomerDTO customerDto = new CustomerDTO();
+		
+		String[] phoneNumberTokens = splitBySpace(phoneNumberWithCountryCode);
+		
+		var countryCode = getCountryCode(phoneNumberTokens);
+		var phoneNumber = getPhoneNumber(phoneNumberTokens);
+		var countryName = getCountryName(countryCode);
+		var state = getPhoneNumberState(phoneNumberWithCountryCode, countryName);
+		
+		LOGGER.info("COUNTRY CODE= " + countryCode + " PHONE NUMBER= " + phoneNumber + " COUNTRY NAME= " + countryName
+				+ " STATE=" + state);
 		
 		customerDto.setCountryCode(countryCode);
 		customerDto.setCountryName(countryName);
