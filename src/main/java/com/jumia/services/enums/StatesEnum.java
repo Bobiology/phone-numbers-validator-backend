@@ -1,4 +1,4 @@
-package com.jumia.services.model;
+package com.jumia.services.enums;
 
 public enum StatesEnum {
 	VALID,

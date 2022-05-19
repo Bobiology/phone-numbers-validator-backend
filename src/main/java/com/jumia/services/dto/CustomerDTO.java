@@ -1,6 +1,6 @@
 package com.jumia.services.dto;
 
-import com.jumia.services.model.StatesEnum;
+import com.jumia.services.enums.StatesEnum;
 
 public class CustomerDTO {
 	public String countryName;

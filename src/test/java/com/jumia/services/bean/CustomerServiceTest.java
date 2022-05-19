@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.jumia.services.beans.impl.CustomerServiceImpl;
-import com.jumia.services.model.StatesEnum;
+import com.jumia.services.enums.StatesEnum;
 
 public class CustomerServiceTest {
 	
