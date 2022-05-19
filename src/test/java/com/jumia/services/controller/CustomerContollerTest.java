@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.jumia.services.controllers.CustomerController;
 import com.jumia.services.exception.JumiaInternalErrorException;
-import com.jumia.services.exception.JumiaNoContentException;
 
 @SpringBootTest
 @AutoConfigureMockMvc

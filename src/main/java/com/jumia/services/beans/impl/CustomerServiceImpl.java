@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 import com.jumia.services.Application;
 import com.jumia.services.beans.CustomerService;
 import com.jumia.services.dao.CustomerDAO;
+import com.jumia.services.ds.CountriesMap;
+import com.jumia.services.ds.CountriesRegex;
 import com.jumia.services.dto.CustomerDTO;
+import com.jumia.services.enums.StatesEnum;
 import com.jumia.services.exception.JumiaGlobalException;
-import com.jumia.services.model.CountriesMap;
-import com.jumia.services.model.CountriesRegex;
-import com.jumia.services.model.StatesEnum;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

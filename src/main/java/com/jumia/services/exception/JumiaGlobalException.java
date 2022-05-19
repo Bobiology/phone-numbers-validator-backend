@@ -18,8 +18,8 @@ public class JumiaGlobalException {
 		return new ResponseEntity<Object>("No content", HttpStatus.NO_CONTENT);
 	}
 	
-	@ExceptionHandler(value = JumiaInternalErrorException.class)
-	public ResponseEntity<Object> exception(JumiaInternalErrorException exception) {
-		return new ResponseEntity<Object>("No content", HttpStatus.INTERNAL_SERVER_ERROR);
+	@ExceptionHandler(value = Exception.class)
+	public ResponseEntity<Object> exception(Exception exception) {
+		return new ResponseEntity<Object>("Internal error", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

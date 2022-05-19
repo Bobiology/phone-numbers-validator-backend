@@ -1,4 +1,4 @@
-package com.jumia.services.model;
+package com.jumia.services.ds;
 
 import java.util.HashMap;
 import java.util.Map;

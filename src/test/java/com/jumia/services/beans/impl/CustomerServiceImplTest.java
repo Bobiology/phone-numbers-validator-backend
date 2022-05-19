@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.jumia.services.model.StatesEnum;
+import com.jumia.services.enums.StatesEnum;
 
 class CustomerServiceImplTest {
 	CustomerServiceImpl customer = new CustomerServiceImpl();
