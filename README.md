@@ -1,4 +1,4 @@
-# phone-numbers-service
+# phone-numbers-validator
 A project to list and categorize country phone numbers
 
 TASK REQUIREMENTS
