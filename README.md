@@ -1,4 +1,4 @@
-# jumia-service
+# phone-numbers-service
 A project to list and categorize country phone numbers
 
 TASK REQUIREMENTS
