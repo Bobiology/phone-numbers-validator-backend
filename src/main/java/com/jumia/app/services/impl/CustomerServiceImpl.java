@@ -21,97 +21,98 @@ import com.jumia.app.services.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-	@Autowired
-	CustomerDAO customerDAO;
+  @Autowired
+  CustomerDAO customerDAO;
 
-	@Override
-	public Page<CustomerDTO> listAll(Pageable pageable) {
+  @Override
+  public Page<CustomerDTO> listAll(Pageable pageable) {
 
-		List<CustomerDTO> list = new ArrayList<>();
+    List<CustomerDTO> list = new ArrayList<>();
 
-		var customerList = customerDAO.listAll();
+    var customerList = customerDAO.listAll();
 
-		customerList.forEach(customer -> {
-			CustomerDTO customerDto = new CustomerDTO();
+    customerList.forEach(customer -> {
+      CustomerDTO customerDto = new CustomerDTO();
 
-			var phoneNumberWithCountryCode = customer.getPhone();
+      var phoneNumberWithCountryCode = customer.getPhone();
 
-			customerDto = mapCustomerToCustomerDTO(phoneNumberWithCountryCode);
-			customerDto.setId(customer.getId());
-			list.add(customerDto);
-		});
+      customerDto = mapCustomerToCustomerDTO(phoneNumberWithCountryCode);
+      customerDto.setId(customer.getId());
+      list.add(customerDto);
+    });
 
-		return toPage(list, pageable);
-	}
+    return toPage(list, pageable);
+  }
 
-	private Page<CustomerDTO> toPage(List<CustomerDTO> list, Pageable pageable) {
-		if (pageable.getOffset() >= list.size()) {
-			return Page.empty();
-		}
-		int startIndex = (int) pageable.getOffset();
-		int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size()
-				: pageable.getOffset() + pageable.getPageSize());
+  private Page<CustomerDTO> toPage(List<CustomerDTO> list, Pageable pageable) {
+    if (pageable.getOffset() >= list.size()) {
+      return Page.empty();
+    }
+    int startIndex = (int) pageable.getOffset();
+    int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size()
+        : pageable.getOffset() + pageable.getPageSize());
 
-		List<CustomerDTO> phoneSubList = list.subList(startIndex, endIndex);
-		return new PageImpl<>(phoneSubList, pageable, list.size());
-	}
+    List<CustomerDTO> phoneSubList = list.subList(startIndex, endIndex);
+    
+    return new PageImpl<>(phoneSubList, pageable, list.size());
+  }
 
-	public CustomerDTO mapCustomerToCustomerDTO(String phoneNumberWithCountryCode) {
+  public CustomerDTO mapCustomerToCustomerDTO(String phoneNumberWithCountryCode) {
 
-		CustomerDTO customerDto = new CustomerDTO();
+    CustomerDTO customerDto = new CustomerDTO();
 
-		String[] phoneNumberTokens = splitBySpace(phoneNumberWithCountryCode);
+    String[] phoneNumberTokens = splitBySpace(phoneNumberWithCountryCode);
 
-		var countryCode = getCountryCode(phoneNumberTokens);
-		var phoneNumber = getPhoneNumber(phoneNumberTokens);
-		var countryName = getCountryName(countryCode);
-		var state = getPhoneNumberState(phoneNumberWithCountryCode, countryName);
+    var countryCode = getCountryCode(phoneNumberTokens);
+    var phoneNumber = getPhoneNumber(phoneNumberTokens);
+    var countryName = getCountryName(countryCode);
+    var state = getPhoneNumberState(phoneNumberWithCountryCode, countryName);
 
-		LOGGER.info("COUNTRY CODE= " + countryCode + " PHONE NUMBER= " + phoneNumber + " COUNTRY NAME= " + countryName
-				+ " STATE=" + state);
+    LOGGER.info("COUNTRY CODE= " + countryCode + " PHONE NUMBER= " + phoneNumber + " COUNTRY NAME= " + countryName
+        + " STATE=" + state);
 
-		customerDto.setCountryCode(countryCode);
-		customerDto.setCountryName(countryName);
-		customerDto.setCountryState(state);
-		customerDto.setPhoneNumber(phoneNumber);
+    customerDto.setCountryCode(countryCode);
+    customerDto.setCountryName(countryName);
+    customerDto.setCountryState(state);
+    customerDto.setPhoneNumber(phoneNumber);
 
-		return customerDto;
-	}
+    return customerDto;
+  }
 
-	private boolean isValid(String phoneNumber, String countryName) {
-		CountriesRegex regexMap = new CountriesRegex();
+  private boolean isValid(String phoneNumber, String countryName) {
+    CountriesRegex regexMap = new CountriesRegex();
 
-		var regex = regexMap.getRegexExpressions().get(countryName);
+    var regex = regexMap.getRegexExpressions().get(countryName);
 
-		return phoneNumber.matches(regex);
-	}
+    return phoneNumber.matches(regex);
+  }
 
-	public Enum<StatesEnum> getPhoneNumberState(String phoneNumber, String countryName) {
-		return isValid(phoneNumber, countryName) ? StatesEnum.VALID : StatesEnum.NOT_VALID;
-	}
+  public Enum<StatesEnum> getPhoneNumberState(String phoneNumber, String countryName) {
+    return isValid(phoneNumber, countryName) ? StatesEnum.VALID : StatesEnum.NOT_VALID;
+  }
 
-	private String[] splitBySpace(String phoneNumber) {
+  private String[] splitBySpace(String phoneNumber) {
 
-		return phoneNumber.split("\\s+");
-	}
+    return phoneNumber.split("\\s+");
+  }
 
-	public Integer getCountryCode(String[] phoneNumbers) {
+  public Integer getCountryCode(String[] phoneNumbers) {
 
-		return Integer.valueOf(phoneNumbers[0].substring(1, 4));
-	}
+    return Integer.valueOf(phoneNumbers[0].substring(1, 4));
+  }
 
-	public String getPhoneNumber(String[] phoneNumbers) {
+  public String getPhoneNumber(String[] phoneNumbers) {
 
-		return phoneNumbers[1];
-	}
+    return phoneNumbers[1];
+  }
 
-	public String getCountryName(Integer countryCode) {
+  public String getCountryName(Integer countryCode) {
 
-		CountriesMap map = new CountriesMap();
+    CountriesMap map = new CountriesMap();
 
-		return map.getCountries().getOrDefault(countryCode, null);
-	}
+    return map.getCountries().getOrDefault(countryCode, null);
+  }
 
 }
