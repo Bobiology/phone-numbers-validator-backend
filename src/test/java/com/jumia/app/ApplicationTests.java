@@ -1,4 +1,4 @@
-package com.jumia.services;
+package com.jumia.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
