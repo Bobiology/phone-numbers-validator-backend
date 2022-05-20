@@ -75,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     customerDto.setCountryCode(countryCode);
     customerDto.setCountryName(countryName);
-    customerDto.setCountryState(state);
+    customerDto.setPhoneStatus(state);
     customerDto.setPhoneNumber(phoneNumber);
 
     return customerDto;
@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
     return phoneNumber.matches(regex);
   }
 
-  public Enum<StatesEnum> getPhoneNumberState(String phoneNumber, String countryName) {
+  public StatesEnum getPhoneNumberState(String phoneNumber, String countryName) {
     return isValid(phoneNumber, countryName) ? StatesEnum.VALID : StatesEnum.NOT_VALID;
   }
 
