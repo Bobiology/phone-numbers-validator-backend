@@ -1,4 +1,4 @@
-package com.jumia.services.exception;
+package com.jumia.app.exception;
 
 public class JumiaInternalErrorException extends RuntimeException{
 

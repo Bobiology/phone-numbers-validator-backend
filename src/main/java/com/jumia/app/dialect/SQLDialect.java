@@ -1,4 +1,4 @@
-package com.jumia.services.dialect;
+package com.jumia.app.dialect;
 
 import java.sql.Types;
 

@@ -1,4 +1,4 @@
-package com.jumia.services.model;
+package com.jumia.app.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

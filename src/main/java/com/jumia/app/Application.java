@@ -1,4 +1,4 @@
-package com.jumia.services;
+package com.jumia.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
