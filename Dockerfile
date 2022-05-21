@@ -1,4 +1,4 @@
 FROM openjdk:11
-ADD target/jumia-services-0.0.1-SNAPSHOT.jar jumia-services-0.0.1-SNAPSHOT.jar
+ADD target/phone-numbers-validator-0.0.1-SNAPSHOT.jar phone-numbers-validator-0.0.1-SNAPSHOT.jar
 EXPOSE 8081
-ENTRYPOINT ["java","-jar","jumia-services-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","phone-numbers-validator-0.0.1-SNAPSHOT.jar"]

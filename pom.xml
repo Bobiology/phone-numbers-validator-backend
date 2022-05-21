@@ -9,11 +9,11 @@
 		<version>2.6.7</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.jumia</groupId>
-	<artifactId>jumia-services</artifactId>
+	<groupId>com.phone.validator</groupId>
+	<artifactId>phone-numbers-validator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jumia-services</name>
-	<description>A Jumia Services project that list and categorize country phone numbers</description>
+	<name>phone-numbers-validator</name>
+	<description>An International phone numbers validator project that list and categorize country phone numbers</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
