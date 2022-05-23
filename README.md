@@ -139,7 +139,7 @@ The UI is written in React and it is meant to complement the Phone Number Valida
 
 ## **Requirements**
 
-- NodeJS
+- NodeJS V17.9
 
 ## **Starting the UI**
 
